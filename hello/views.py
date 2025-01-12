@@ -1,24 +1,32 @@
-from django.shortcuts import render
-
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from .models import Greeting
 
 import os
 import requests
 from django.http import HttpResponse
 
-# Create your views here.
+# Login view
+def login_view(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid credentials'})
+    return render(request, 'login.html')
 
-#def index(request):
-#    return render(request, "index.html")
-
-#def index(request):
-#    r = requests.get('https://httpbin.org/status/418', timeout=10)
-#    return HttpResponse('<pre>' + r.text + '</pre>')
-
+# Protect these views with login_required decorator
+@login_required(login_url='login')
 def index(request):
     times = int(os.environ.get('TIMES', 3))
     return HttpResponse('Hello! ' * times)
 
+@login_required(login_url='login')
 def db(request):
     # If you encounter errors visiting the `/db/` page on the example app, check that:
     #
