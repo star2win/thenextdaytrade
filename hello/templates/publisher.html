@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Enter Stock Trade</h2>
+            <form method="post" class="form">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="ticker">Stock Ticker:</label>
+                    <input type="text" name="ticker" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price:</label>
+                    <input type="number" step="0.01" name="price" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="trade_type">Trade Type:</label>
+                    <select name="trade_type" class="form-control" required>
+                        <option value="BUY">Buy</option>
+                        <option value="SELL">Sell</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Trade</button>
+            </form>
+        </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <h2>Recent Trades</h2>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Ticker</th>
+                        <th>Price</th>
+                        <th>Type</th>
+                        <th>Publisher</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trade in trades %}
+                    <tr>
+                        <td>{{ trade.timestamp|date:"Y-m-d H:i:s" }}</td>
+                        <td>{{ trade.ticker }}</td>
+                        <td>${{ trade.price }}</td>
+                        <td>{{ trade.trade_type }}</td>
+                        <td>{{ trade.publisher.username }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %} 

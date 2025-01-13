@@ -89,15 +89,6 @@
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      {% if user.is_authenticated %}
-        <li class="navbar-right">
-          <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
-        </li>
-      {% else %}
-        <li class="navbar-right">
-          <a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
-        </li>
-      {% endif %}
       <li class="navbar-right">
         <a href="https://devcenter.heroku.com"><span class="glyphicon glyphicon-book"></span> Heroku Dev Center</a>
       </li>

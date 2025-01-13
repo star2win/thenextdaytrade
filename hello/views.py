@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
-from .models import Greeting
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth import authenticate, login, logout
+from .models import Greeting, StockTrade, UserProfile
+from django.http import HttpResponseForbidden
 
 import os
 import requests
@@ -23,8 +24,9 @@ def login_view(request):
 # Protect these views with login_required decorator
 @login_required(login_url='login')
 def index(request):
-    times = int(os.environ.get('TIMES', 3))
-    return HttpResponse('Hello! ' * times)
+#    times = int(os.environ.get('TIMES', 3))
+#    return HttpResponse('Hello! ' * times)
+    return render(request, 'index.html')
 
 @login_required(login_url='login')
 def db(request):
@@ -44,3 +46,36 @@ def db(request):
     greetings = Greeting.objects.all()
 
     return render(request, "db.html", {"greetings": greetings})
+
+def logout_view(request):
+    logout(request)
+    return redirect('index')
+
+def is_publisher(user):
+    try:
+        return user.userprofile.is_publisher
+    except UserProfile.DoesNotExist:
+        return False
+
+@login_required(login_url='login')
+@user_passes_test(is_publisher)
+def publisher_view(request):
+    if request.method == 'POST':
+        trade = StockTrade(
+            publisher=request.user,
+            ticker=request.POST['ticker'].upper(),
+            price=request.POST['price'],
+            trade_type=request.POST['trade_type']
+        )
+        trade.save()
+        return redirect('publisher')
+    
+    trades = StockTrade.objects.all()
+    return render(request, 'publisher.html', {'trades': trades})
+
+@login_required(login_url='login')
+def reader_view(request):
+    if request.user.userprofile.is_publisher:
+        return HttpResponseForbidden("Publishers cannot access reader view")
+    trades = StockTrade.objects.all()
+    return render(request, 'reader.html', {'trades': trades})

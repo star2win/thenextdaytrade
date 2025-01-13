@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Stock Trades</h2>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Time</th>
+                <th>Ticker</th>
+                <th>Price</th>
+                <th>Type</th>
+                <th>Publisher</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for trade in trades %}
+            <tr>
+                <td>{{ trade.timestamp|date:"Y-m-d H:i:s" }}</td>
+                <td>{{ trade.ticker }}</td>
+                <td>${{ trade.price }}</td>
+                <td>{{ trade.trade_type }}</td>
+                <td>{{ trade.publisher.username }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 
