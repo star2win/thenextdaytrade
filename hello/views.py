@@ -26,7 +26,7 @@ def login_view(request):
     return render(request, 'login.html')
 
 # Protect these views with login_required decorator
-@login_required(login_url='login')
+#@login_required(login_url='login')
 def index(request):
     return render(request, 'index.html')
 

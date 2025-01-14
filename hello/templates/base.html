@@ -51,44 +51,42 @@
       <li class="active">
         <a href="/"><span class="glyphicon glyphicon-home"></span> Home</a>
       </li>
-      <li>
-        <a href="https://devcenter.heroku.com/articles/how-heroku-works"><span class="glyphicon glyphicon-user"></span> How Heroku Works</a>
-      </li>
+      
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Getting Started Guides (Cedar) <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Future Dropdown A<span class="caret"></span></a>
           <ul class="dropdown-menu" role="menu">
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-ruby">Getting Started on Heroku with Ruby</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs">Getting Started on Heroku with Node.js</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-php">Getting Started on Heroku with PHP</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-python">Getting Started on Heroku with Python</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java">Getting Started on Heroku with Java</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-clojure">Getting Started on Heroku with Clojure</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-scala">Getting Started on Heroku with Scala</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-go">Getting Started on Heroku with Go</a></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-dotnet">Getting Started on Heroku with .NET</a></li>
+            <li><a href="/">Option 1</a></li>
+            <li><a href="/">Option 2</a></li>
+            <li><a href="/">Option 3</a></li>
+            <li><a href="/">Option 4</a></li>
+            <li><a href="/">Option 5</a></li>
+            <li><a href="/">Option 6</a></li>
+            <li><a href="/">Option 7</a></li>
+            <li><a href="/">Option 8</a></li>
             <li class="divider"></li>
-            <li><a href="https://devcenter.heroku.com/articles/getting-started-with-heroku-and-connect-without-local-dev">Getting Started on Heroku with Heroku Connect</a></li>
+            <li><a href="/">Option 9</a></li>
           </ul>
       </li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Getting Started Guides (Fir) <span class="caret"></span></a>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-info-sign"></span> Future Dropdown B<span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-ruby-fir">Getting Started on Heroku Fir with Ruby</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-nodejs-fir">Getting Started on Heroku Fir with Node.js</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-php-fir">Getting Started on Heroku Fir with PHP</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-python-fir">Getting Started on Heroku Fir with Python</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java-maven-fir">Getting Started on Heroku Fir with Java (Maven)</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-java-gradle-fir">Getting Started on Heroku Fir with Java (Gradle)</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-clojure-fir">Getting Started on Heroku Fir with Clojure</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-scala-fir">Getting Started on Heroku Fir with Scala</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-go-fir">Getting Started on Heroku Fir with Go</a></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-dotnet-fir">Getting Started on Heroku Fir with .NET</a></li>
+          <li><a href="/">Option 1</a></li>
+          <li><a href="/">Option 2</a></li>
+          <li><a href="/">Option 3</a></li>
+          <li><a href="/">Option 4</a></li>
+          <li><a href="/">Option 5</a></li>
+          <li><a href="/">Option 6</a></li>
+          <li><a href="/">Option 7</a></li>
+          <li><a href="/">Option 8</a></li>
+          <li><a href="/">Option 9</a></li>
           <li class="divider"></li>
-          <li><a href="https://devcenter.heroku.com/articles/getting-started-with-heroku-and-connect-without-local-dev">Getting Started on Heroku with Heroku Connect</a></li>
+          <li><a href="/">Option 10</a></li>
         </ul>
       </li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
+
+      
       {% if user.is_authenticated %}
         <li class="navbar-right">
           <a href="{% url 'logout' %}"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
@@ -98,9 +96,14 @@
           <a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a>
         </li>
       {% endif %}
-      <li class="navbar-right">
-        <a href="https://devcenter.heroku.com"><span class="glyphicon glyphicon-book"></span> Heroku Dev Center</a>
+
+      <li>
+        <a class="navbar-link" href="/trader"><span class="glyphicon glyphicon-book"></span> Trader Page</a>
       </li>
+      <li>
+        <a class="navbar-link" href="/reader"><span class="glyphicon glyphicon-book"></span> Reader Page</a>
+      </li>
+
     </ul>
   </div>
 </nav>
