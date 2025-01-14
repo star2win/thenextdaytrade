@@ -16,7 +16,11 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('index')
+            # Redirect publishers and readers to their respective pages
+            if user.userprofile.is_trader:
+                return redirect('trader')
+            else:
+                return redirect('reader')
         else:
             return render(request, 'login.html', {'error': 'Invalid credentials'})
     return render(request, 'login.html')
@@ -24,8 +28,6 @@ def login_view(request):
 # Protect these views with login_required decorator
 @login_required(login_url='login')
 def index(request):
-#    times = int(os.environ.get('TIMES', 3))
-#    return HttpResponse('Hello! ' * times)
     return render(request, 'index.html')
 
 @login_required(login_url='login')
@@ -51,31 +53,29 @@ def logout_view(request):
     logout(request)
     return redirect('index')
 
-def is_publisher(user):
+def is_trader(user):
     try:
-        return user.userprofile.is_publisher
+        return user.userprofile.is_trader
     except UserProfile.DoesNotExist:
         return False
 
 @login_required(login_url='login')
-@user_passes_test(is_publisher)
-def publisher_view(request):
+@user_passes_test(is_trader)
+def trader_view(request):
     if request.method == 'POST':
         trade = StockTrade(
-            publisher=request.user,
+            trader=request.user,
             ticker=request.POST['ticker'].upper(),
             price=request.POST['price'],
             trade_type=request.POST['trade_type']
         )
         trade.save()
-        return redirect('publisher')
+        return redirect('trader')
     
     trades = StockTrade.objects.all()
-    return render(request, 'publisher.html', {'trades': trades})
+    return render(request, 'trader.html', {'trades': trades})
 
 @login_required(login_url='login')
 def reader_view(request):
-    if request.user.userprofile.is_publisher:
-        return HttpResponseForbidden("Publishers cannot access reader view")
     trades = StockTrade.objects.all()
     return render(request, 'reader.html', {'trades': trades})

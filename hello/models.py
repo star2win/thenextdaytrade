@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    is_publisher = models.BooleanField(default=False)
+    is_trader = models.BooleanField(default=False)
 
 class StockTrade(models.Model):
     TRADE_TYPES = [
@@ -11,7 +11,7 @@ class StockTrade(models.Model):
         ('SELL', 'Sell'),
     ]
     
-    publisher = models.ForeignKey(User, on_delete=models.CASCADE)
+    trader = models.ForeignKey(User, on_delete=models.CASCADE)
     ticker = models.CharField(max_length=10)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     trade_type = models.CharField(max_length=4, choices=TRADE_TYPES)
