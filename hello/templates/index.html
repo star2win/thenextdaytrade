@@ -8,10 +8,10 @@
         <h1>Stock Trading Platform</h1>
         {% if user.is_authenticated %}
             {% if user.userprofile.is_trader %}
-                <p>Welcome Trader {{ user.username }}!</p>
+                <p>Welcome Trader {{ user.username|capfirst }}!</p>
                 <a href="{% url 'trader' %}" class="btn btn-lg btn-primary">Go to Trader Dashboard</a>
             {% else %}
-                <p>Welcome Reader {{ user.username }}!</p>
+                <p>Welcome Reader {{ user.username|capfirst }}!</p>
                 <a href="{% url 'reader' %}" class="btn btn-lg btn-primary">View Stock Trades</a>
             {% endif %}
         {% else %}

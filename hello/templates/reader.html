@@ -18,7 +18,11 @@
                 <td>{{ trade.timestamp|date:"Y-m-d H:i:s" }}</td>
                 <td>{{ trade.ticker }}</td>
                 <td>${{ trade.price }}</td>
-                <td>{{ trade.trade_type }}</td>
+                <td>
+                    <span class="badge {% if trade.trade_type == 'BUY' %}text-bg-success{% else %}text-bg-danger{% endif %}">
+                        {{ trade.trade_type }}
+                    </span>
+                </td>
                 <td>{{ trade.publisher.username }}</td>
             </tr>
             {% endfor %}

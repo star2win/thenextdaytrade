@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth import authenticate, login, logout
 from .models import Greeting, StockTrade, UserProfile
 from django.http import HttpResponseForbidden
+from django.http import JsonResponse
+from .utils import is_valid_ticker
 
 import os
 import requests
@@ -79,3 +81,10 @@ def trader_view(request):
 def reader_view(request):
     trades = StockTrade.objects.all()
     return render(request, 'reader.html', {'trades': trades})
+
+def validate_ticker(request):
+    """API endpoint to check if a stock ticker is valid"""
+    symbol = request.GET.get('symbol', '').upper()
+    return JsonResponse({
+        'valid': is_valid_ticker(symbol)
+    })

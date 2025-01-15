@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
 import hello.views
 
@@ -27,6 +27,7 @@ urlpatterns = [
     path('logout/', hello.views.logout_view, name='logout'),
     path('trader/', hello.views.trader_view, name='trader'),
     path('reader/', hello.views.reader_view, name='reader'),
+    path('api/validate-ticker/', hello.views.validate_ticker, name='validate_ticker'),
     # Uncomment this and the entry in `INSTALLED_APPS` if you wish to use the Django admin feature:
     # https://docs.djangoproject.com/en/5.1/ref/contrib/admin/
     path("admin/", admin.site.urls),
