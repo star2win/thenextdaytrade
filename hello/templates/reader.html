@@ -23,7 +23,7 @@
                         {{ trade.trade_type }}
                     </span>
                 </td>
-                <td>{{ trade.publisher.username }}</td>
+                <td>{{ trade.trader.username|title }}</td>
             </tr>
             {% endfor %}
         </tbody>
